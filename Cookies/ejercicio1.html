@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var c = null;
+            var galletas = document.cookie;
+            galletas = galletas.split(";");
+
+            //Busca la cookie
+            for (var i = 0; i < galletas.length; i++) {
+                var galleta = galletas[i].split("=");
+                if (galleta[0].indexOf("visitas")>=0) {
+                    c = galleta;
+                    break;
+                }
+            }
+
+            //si es nula la crea
+            if (c === null) {
+                document.cookie = "visitas=1";
+            } else {
+                c[1] = parseInt(c[1]);
+                document.write("visitas: " + c[1]);
+                c[1]++;
+                document.cookie ="visitas=" + c[1];
+            }
+        </script>
+    </head>
+    <body>       
+    </body>
+</html>

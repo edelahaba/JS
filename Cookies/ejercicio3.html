@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var est = 0;
+            window.onload = function () {
+
+                var c = null;
+
+                function buscar() {
+                    var galletas = document.cookie;
+                    galletas = galletas.split(";");
+
+                    for (var i = 0; i < galletas.length; i++) {
+                        var galleta = galletas[i].split("=");
+                        if (galleta[0].indexOf("estilo") >= 0) {
+                            c = galleta;
+                            break;
+                        }
+                    }
+                }
+
+                if (c == null) {
+                    document.cookie = "estilo=1";
+                }
+
+                buscar();
+                estilo();
+
+                document.getElementById("actualizar").addEventListener("click", actualizar);
+
+                function actualizar() {
+
+                    var objetos = document.getElementsByClassName("radio");
+                    for (var i = 0; i < objetos.length; i++) {
+                        if (objetos[i].checked) {
+                            est = parseInt(objetos[i].value);
+                            i = objetos.length;
+                        }
+                    }
+                    document.cookie = "estilo=" + est;
+                    buscar();
+                    estilo();
+                }
+
+                function estilo() {
+                    c[1] = parseInt(c[1]);
+                    if (c[1] == 1) {
+                        document.getElementById("hdestilo").href = "normal.css";
+                    } else if (c[1] == 2) {
+                        document.getElementById("hdestilo").href = "chillona.css";
+                    } else if (c[1] == 3) {
+                        document.getElementById("hdestilo").href = "hacker.css";
+                    } else if (c[1] == 4) {
+                        document.getElementById("hdestilo").href = "delicada.css";
+                    }
+                }
+
+            };
+
+        </script>
+        <link id="hdestilo" href="normal.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <table border="1">
+            <input class="radio" type="radio" name="estilo" value="1"> Normal
+            <br>
+            <input class="radio" type="radio" name="estilo" value="2"> Chillona
+            <br>
+            <input class="radio" type="radio" name="estilo" value="3"> Hacker
+            <br>
+            <input class="radio" type="radio" name="estilo" value="4"> Delicada
+            <input type="button" id="actualizar" value="Actualizar">
+        </table>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var c = null;
+            window.onload = function () {
+                document.getElementById("nuevo").addEventListener("click", nuevo);
+                document.getElementById("eliminar").addEventListener("click", eliminar);
+                document.getElementById("visualizar").addEventListener("click", visualizar);
+                document.getElementById("modificar").addEventListener("click", modificar);
+                
+                function nuevo() {
+                    var nombre = document.getElementById("nombre").value;
+                    var valor = document.getElementById("valor").value;
+                    document.cookie = nombre + "=" + valor;
+                }
+
+                function eliminar() {
+                    var nombre = document.getElementById("nombre").value;
+                    buscar(nombre);
+                    document.cookie = c[0] + "=" + c[1] + ";" + "expires=Thu, 18 Dec 1980 12:00:00 UTC";
+                }
+
+                function visualizar() {
+                    var nombre = document.getElementById("nombre").value;
+                    buscar(nombre);
+                    document.getElementById("valor").value = c[1];
+                }
+
+                function modificar() {
+                    var nombre = document.getElementById("nombre").value;
+                    var valor = document.getElementById("valor").value;
+                    document.cookie = nombre+"="+valor;
+                }
+
+                function buscar(valor) {
+                    var galletas = document.cookie;
+                    galletas = galletas.split(";");
+
+                    //Busca la cookie
+                    for (var i = 0; i < galletas.length; i++) {
+                        var galleta = galletas[i].split("=");
+                        if (galleta[0].indexOf(valor) >= 0) {
+                            c = galleta;
+                            break;
+                        }
+                    }
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <table border="1">
+            <tr><td>Nombre</td><td><input type="text" id="nombre"></td></tr>
+            <tr><td>Valor</td><td><input type="text" id="valor"></td></tr>
+        </table>
+        <input type="button" value="Nuevo" id="nuevo">
+        <input type="button" value="Eliminar" id="eliminar">
+        <input type="button" value="Modificar" id="modificar">
+        <input type="button" value="Visualizar" id="visualizar">
+    </body>
+</html>

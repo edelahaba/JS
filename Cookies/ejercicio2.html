@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+
+            var c = null;
+            var galletas = document.cookie;
+            galletas = galletas.split(";");
+
+            for (var i = 0; i < galletas.length; i++) {
+                var galleta = galletas[i].split("=");
+                if (galleta[0].indexOf("nombre") >= 0) {
+                    c = galleta;
+                    break;
+                }
+            }
+
+            if (c == null) {
+                document.write("Nombre<input type=\"text\" id=\"nombre\">");
+                document.write("<input type=\"submit\" value=\"Asignar\" onclick=asignar();>");
+            } else {
+                document.write("Bienvenido de nuevo: " + c[1]);
+                document.write("<br><input type=\"submit\" value=\"Eliminar\" onclick=eliminar();>");
+                document.write("<br><br>Nombre<input type=\"text\" id=\"nombre\">");
+                document.write("<br><input type=\"submit\" value=\"Cambiar nombre\" onclick=cambiar();>");
+            }
+
+            function asignar() {
+                var n = document.getElementById("nombre").value;
+                document.cookie = "nombre=" + n;
+                location.reload();
+            }
+
+            function eliminar() {
+                document.cookie = "nombre=" + c[1] + ";" + "expires=Thu, 18 Dec 1980 12:00:00 UTC";
+                location.reload();
+            }
+
+            function cambiar() {
+                document.cookie = "nombre=" + document.getElementById("nombre").value;
+                location.reload();
+            }
+
+        </script>
+    </head>
+    <body>       
+    </body>
+</html>
