@@ -27,6 +27,7 @@ and open the template in the editor.
                     var nombre = document.getElementById("nombre").value;
                     buscar(nombre);
                     document.cookie = c[0] + "=" + c[1] + ";" + "expires=Thu, 18 Dec 1980 12:00:00 UTC";
+                    location.reload();
                 }
 
                 function visualizar() {

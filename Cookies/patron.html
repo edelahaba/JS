@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function(){
+            document.getElementById("nombre").addEventListener("keyup",condicion);
+        };
+
+        function condicion(e){
+            var evento = e || window.event;
+            var valor = document.getElementById("nombre").value;
+            var patron = /^[A-z]+$/;
+            if(patron.test(valor)){
+                alert("coincide");
+            } else {
+               evento.returnValue = false;
+                if (evento.preventDefault)
+                    evento.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+Nombre <input type="text" id="nombre">
+</body>
+</html>
